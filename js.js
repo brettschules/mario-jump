@@ -5,6 +5,8 @@ var canvas  = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 var x = 0
 var y = 0
+dx = 50
+dy = 50
 
 var spacebarPressed = false;
 
@@ -15,24 +17,27 @@ window.onload = function() {
 function drawMario() {
     image = new Image();
     image.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI4b_4gyvaRc1GeiEvr5x4FEVwJni-hf3A8qdxg70loeqY6GpxdHaIlpVi";
-    x = canvas.width / 2 - image.width /2;
+    x = canvas.width / 2 - image.width / 2;
     y = canvas.height - image.height;
 
 
-    if(spacebarPressed && y > 358) {
-      y = y-7
+    if (spacebarPressed) {
+      while (y > canvas.height / 2 - image.height / 2) {
+        y = y + -dy
+        context.drawImage(image, x, y);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+      }
     }
 
+    context.drawImage(image, x, y);
+
+  }
+
 function draw() {
+
   drawMario()
 }
-
-    context.drawImage(image, x, y);
-}
-
-
-
-
 
 document.addEventListener("keydown", keyDownHandler, false);
 // document.addEventListener("keyup", keyUpHandler, false);
